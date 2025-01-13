@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart';
+import '../database/ledger_db.dart';
+import '../database/summary_db.dart';
+
+class SummarizeButton extends StatelessWidget {
+  const SummarizeButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () async {
+        // Retrieve logs from today's date
+        final logs = await LedgerDB.getTodayLogs();
+        if (logs.isNotEmpty) {
+          // Convert logs to JSON string
+          final compiledLogs = logs.join('. ');
+
+          // Placeholder: AI summarization logic to be implemented here
+          final summary = await summarizeUsingAI(compiledLogs);
+
+          // Save compiled logs and summary to SummaryDB
+          await SummaryDB.insertSummary(compiledLogs, summary);
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Summary saved successfully')),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('No logs available for today')),
+          );
+        }
+      },
+      child: const Text('Summarize'),
+    );
+  }
+
+  Future<String> summarizeUsingAI(String logs) async {
+    // Placeholder function for AI summarization
+    // Replace this with your AI model integration
+    return 'This is a summarized text.';
+  }
+}
