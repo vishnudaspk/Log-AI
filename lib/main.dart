@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'ui/home_page.dart';
-// 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
+import 'services/secure_storage_service.dart'; // Import the secure storage service
 
-void main() {
+void main() async {
+  // Ensure Flutter binding is initialized
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Save API key securely (only needs to be done once, like on app startup)
+  await SecureStorageService.setApiKey(
+      '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'); // Use your actual API key
+
   // Log when the app starts
   debugPrint('Starting the application...');
   runApp(const MyApp());

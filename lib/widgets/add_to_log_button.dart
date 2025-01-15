@@ -33,12 +33,6 @@ class AddToLogButton extends StatelessWidget {
                   },
                   child: const Text('Submit'),
                 ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Cancel'),
-                ),
               ],
             );
           },
@@ -57,7 +51,7 @@ class AddToLogButton extends StatelessWidget {
       icon: const Icon(Icons.add),
       label: const Text('Add to Log'),
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(45, 90),
+        minimumSize: const Size(90, 90),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),

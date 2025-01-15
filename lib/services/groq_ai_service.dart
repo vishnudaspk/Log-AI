@@ -1,16 +1,20 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
+import 'secure_storage_service.dart';
 
 class GroqAIService {
-  static const String apiKey =
-      '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';
   static const String endpoint =
       'https://api.groq.com/openai/v1/chat/completions';
 
   // Function to call the GROQ AI API
   static Future<String?> summarizeLogs(String compiledLogs) async {
     try {
+      final apiKey = await SecureStorageService.getApiKey();
+      if (apiKey == null) {
+        throw Exception('API key is not set.');
+      }
+
       final url = Uri.parse(endpoint);
       final body = {
         "model": "llama-3.3-70b-versatile",
@@ -69,6 +73,11 @@ class GroqAIService {
   // Wrapper function to allow calling other API methods without changing UI logic
   static Future<String?> getChatCompletion(String userMessage) async {
     try {
+      final apiKey = await SecureStorageService.getApiKey();
+      if (apiKey == null) {
+        throw Exception('API key is not set.');
+      }
+
       final url = Uri.parse(endpoint);
       final body = {
         "model": "llama-3.3-70b-versatile",
