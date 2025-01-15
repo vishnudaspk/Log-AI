@@ -37,9 +37,23 @@ class LogHistoryPage extends StatelessWidget {
             itemBuilder: (context, index) {
               final log = logs[index];
               debugPrint('Displaying log: ${log['timestamp']}');
-              return ListTile(
-                title: Text(log['log']),
-                subtitle: Text(log['timestamp']),
+              return Card(
+                margin: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 8.0), // Margin around each card
+                elevation: 4.0, // Elevation for shadow effect
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0), // Rounded corners
+                  side: const BorderSide(
+                    color: Color.fromARGB(255, 193, 169, 169), // Border color
+                    width: 2.0, // Border width
+                  ),
+                ),
+                child: ListTile(
+                  title: Text(
+                    log['log'],
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(log['timestamp']),
               );
             },
           );
