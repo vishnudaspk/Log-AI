@@ -6,7 +6,7 @@ class LogHistoryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return ElevatedButton.icon(
       onPressed: () {
         debugPrint('LogHistoryButton pressed. Navigating to LogHistoryPage.');
 
@@ -15,7 +15,14 @@ class LogHistoryButton extends StatelessWidget {
           MaterialPageRoute(builder: (context) => const LogHistoryPage()),
         );
       },
-      child: const Text('Log History'),
+      icon: const Icon(Icons.history),
+      label: const Text('Log History'),
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(90, 90),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
     );
   }
 }

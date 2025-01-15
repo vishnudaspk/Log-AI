@@ -82,11 +82,19 @@ class SummarizeButtonState extends State<SummarizeButton> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return ElevatedButton.icon(
       onPressed: _isLoading ? null : _summarizeLogs,
-      child: _isLoading
-          ? const CircularProgressIndicator(color: Colors.white)
+      icon: const Icon(Icons.summarize),
+      label: _isLoading
+          ? const CircularProgressIndicator.adaptive(
+              backgroundColor: Colors.white)
           : const Text('Summarize'),
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(90, 90),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
     );
   }
 }

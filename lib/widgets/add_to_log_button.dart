@@ -6,7 +6,7 @@ class AddToLogButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return ElevatedButton.icon(
       onPressed: () async {
         debugPrint('AddToLogButton pressed. Prompting user for log input.');
 
@@ -33,6 +33,12 @@ class AddToLogButton extends StatelessWidget {
                   },
                   child: const Text('Submit'),
                 ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Cancel'),
+                ),
               ],
             );
           },
@@ -48,7 +54,14 @@ class AddToLogButton extends StatelessWidget {
           debugPrint('No log entered or input was empty.');
         }
       },
-      child: const Text('Add to Log'),
+      icon: const Icon(Icons.add),
+      label: const Text('Add to Log'),
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(45, 90),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
     );
   }
 }

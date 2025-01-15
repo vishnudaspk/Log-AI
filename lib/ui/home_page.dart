@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import '../widgets/add_to_log_button.dart';
 import '../widgets/summarize_button.dart';
@@ -13,22 +15,23 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Logger App'),
+        backgroundColor: const Color.fromARGB(255, 198, 180, 180),
+        title: const Text('Logger App', style: TextStyle(color: Colors.black)),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            // Log when AddToLogButton is displayed
-            AddToLogButton(),
-            SizedBox(height: 20),
-            // Log when SummarizeButton is displayed
-            SummarizeButton(),
-            SizedBox(height: 20),
-            // Log when LogHistoryButton is displayed
-            LogHistoryButton(),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 8),
+          // Log when AddToLogButton is displayed
+          AddToLogButton(),
+          SizedBox(height: 8),
+          // Log when SummarizeButton is displayed
+          SummarizeButton(),
+          SizedBox(height: 8),
+          // Log when LogHistoryButton is displayed
+          LogHistoryButton(),
+        ],
       ),
     );
   }
