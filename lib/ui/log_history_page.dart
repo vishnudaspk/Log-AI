@@ -49,7 +49,7 @@ class _LogHistoryPageState extends State<LogHistoryPage> {
           }
 
           // Sort logs by timestamp (latest first)
-          final logs = snapshot.data!
+          final logs = List<Map<String, dynamic>>.from(snapshot.data!)
             ..sort((a, b) {
               return DateTime.parse(b['timestamp'])
                   .compareTo(DateTime.parse(a['timestamp']));
@@ -95,6 +95,7 @@ class _LogHistoryPageState extends State<LogHistoryPage> {
                       // Optionally, refresh the list after deletion
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text('Log deleted successfully')));
+                      setState(() {});
 
                       // Refresh the widget by calling setState (you can use StatefulWidget instead of StatelessWidget if needed)
                     },

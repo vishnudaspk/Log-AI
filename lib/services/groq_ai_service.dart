@@ -38,18 +38,25 @@ class GroqAIService {
           'Sending request with the following body: ${jsonEncode(body)}');
 
       // Make the request
-      final response = await http.post(
-        url,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $apiKey',
-        },
-        body: jsonEncode(body),
-      );
+      final response = await http
+          .post(
+            url,
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer $apiKey',
+            },
+            body: jsonEncode(body),
+          )
+          .timeout(const Duration(seconds: 15));
 
       // Log response status and body
       debugPrint('API Response Status Code: ${response.statusCode}');
       debugPrint('API Response Body: ${response.body}');
+
+      if (compiledLogs.trim().isEmpty) {
+        debugPrint('Error: Logs are empty or null.');
+        return null;
+      }
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);

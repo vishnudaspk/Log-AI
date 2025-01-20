@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'ui/home_page.dart';
-import 'services/secure_storage_service.dart'; // Import the secure storage service
+import 'ui/intro_page.dart'; // Keep this import
+import 'ui/login_page.dart';
+import 'services/secure_storage_service.dart'; // Secure storage service
 
 void main() async {
-  // Ensure Flutter binding is initialized
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Save API key securely (only needs to be done once, like on app startup)
+  // Save API key securely
   await SecureStorageService.setApiKey(
-      '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'); // Use your actual API key
+      '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');
 
-  // Log when the app starts
   debugPrint('Starting the application...');
   runApp(const MyApp());
 }
@@ -20,14 +20,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Log when the MyApp widget is being built
     debugPrint('Building MyApp widget...');
     return MaterialApp(
       title: 'Logger App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: IntroPage(), // Set IntroPage as the first screen
+      routes: {
+        '/login': (context) => LoginPage(),
+        '/home': (context) => HomePage(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import '../widgets/add_to_log_button.dart';
 import '../widgets/summarize_button.dart';
