@@ -9,6 +9,8 @@ class UserDetails {
   static late String profession;
   static late String purpose;
 
+  static late bool isFirstTime;
+
   static Future<void> loadUserDetails() async {
     final prefs = await SharedPreferences.getInstance();
     name = prefs.getString('name') ?? '';
@@ -16,6 +18,7 @@ class UserDetails {
     phone = prefs.getString('phone') ?? '';
     profession = prefs.getString('profession') ?? '';
     purpose = prefs.getString('purpose') ?? '';
+    isFirstTime = prefs.getBool('isFirstTime') ?? true;
   }
 
   static Future<void> saveUserDetails({
@@ -31,6 +34,7 @@ class UserDetails {
     await prefs.setString('phone', phone);
     await prefs.setString('profession', profession);
     await prefs.setString('purpose', purpose);
+    await prefs.setBool('isFirstTime', false);
   }
 }
 
@@ -51,7 +55,7 @@ class LoginPageState extends State<LoginPage> {
     await UserDetails.saveUserDetails(
       name: _nameController.text,
       email: _emailController.text,
-      phone: _nameController.text,
+      phone: _phoneController.text,
       profession: _professionController.text,
       purpose: _purposeController.text,
     );
@@ -61,6 +65,18 @@ class LoginPageState extends State<LoginPage> {
 
     // Navigate to the home page
     Navigator.pushReplacementNamed(context, '/home');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Load user details and check if it's the first time
+    UserDetails.loadUserDetails().then((_) {
+      if (!UserDetails.isFirstTime) {
+        // If it's not the first time, navigate directly to the home page
+        Navigator.pushReplacementNamed(context, '/home');
+      }
+    });
   }
 
   @override
@@ -87,6 +103,7 @@ class LoginPageState extends State<LoginPage> {
               TextField(
                 controller: _emailController,
                 decoration: const InputDecoration(labelText: 'Email ID'),
+                keyboardType: TextInputType.emailAddress,
               ),
               TextField(
                 controller: _phoneController,
