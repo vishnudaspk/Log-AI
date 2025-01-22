@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'ui/home_page.dart';
-import 'ui/intro_page.dart'; // Keep this import
+import 'ui/intro_page.dart';
 import 'ui/login_page.dart';
-import 'services/secure_storage_service.dart'; // Secure storage service
+import 'services/secure_storage_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

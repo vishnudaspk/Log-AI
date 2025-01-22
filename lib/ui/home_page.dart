@@ -2,34 +2,50 @@ import 'package:flutter/material.dart';
 import '../widgets/add_to_log_button.dart';
 import '../widgets/summarize_button.dart';
 import '../widgets/log_history_button.dart';
+import '../widgets/logout_button.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Log when the HomePage is built
     debugPrint('HomePage widget is being built.');
 
     return Scaffold(
+      backgroundColor: const Color(0xFF1A1A1A),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 198, 180, 180),
-        title: const Text('Logger App', style: TextStyle(color: Colors.black)),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 8),
-          // Log when AddToLogButton is displayed
-          AddToLogButton(),
-          SizedBox(height: 8),
-          // Log when SummarizeButton is displayed
-          SummarizeButton(),
-          SizedBox(height: 8),
-          // Log when LogHistoryButton is displayed
-          LogHistoryButton(),
+        leading: null,
+        backgroundColor: const Color(0xFF2C2C2C),
+        automaticallyImplyLeading: false,
+        title: const Text(
+          'Logger App',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+          ),
+        ),
+        actions: [
+          const LogoutButton(),
         ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 12),
+            // Log when AddToLogButton is displayed
+            const AddToLogButton(),
+            const SizedBox(height: 16),
+            // Log when SummarizeButton is displayed
+            const SummarizeButton(),
+            const SizedBox(height: 16),
+            // Log when LogHistoryButton is displayed
+            const LogHistoryButton(),
+          ],
+        ),
       ),
     );
   }
